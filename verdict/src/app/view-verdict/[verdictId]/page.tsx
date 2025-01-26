@@ -24,7 +24,6 @@ function ViewVerdict() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log('Document:', docSnap.data());
         setVerdict(docSnap.data());
       } else {
         console.error('No such document!');
@@ -37,14 +36,22 @@ function ViewVerdict() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
-      <Navbar userName={null} onSignOut={function (): void {
-              throw new Error('Function not implemented.');
-          } } />
-      <main className="flex-grow max-w-4xl mx-auto py-12 px-6 lg:px-12">
+    <div
+      className="flex flex-col min-h-screen text-gray-900"
+      style={{
+        backgroundImage: "url('/law-bg.jpg')",
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
+    >
+      <Navbar userName={null} onSignOut={() => {}} />
+      <main className="flex-grow flex items-center justify-center py-12 px-4">
         {verdict ? (
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <h1 className="text-4xl font-bold text-teal-700 mb-6">Verdict Details</h1>
+          <div className="bg-white shadow-xl rounded-lg p-10 w-full max-w-4xl">
+            <h1 className="text-3xl font-extrabold text-teal-700 text-center mb-8">
+              Verdict Details
+            </h1>
             <div className="space-y-6">
               <p className="text-lg text-gray-800">
                 <span className="font-semibold">Case Number:</span> {verdict.caseNumber}
@@ -70,7 +77,7 @@ function ViewVerdict() {
             </div>
           </div>
         ) : (
-          <p className="text-center text-lg font-medium text-gray-700">Loading verdict...</p>
+          <p className="text-center text-lg font-medium text-white">Loading verdict...</p>
         )}
       </main>
 

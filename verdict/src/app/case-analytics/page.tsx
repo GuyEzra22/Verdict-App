@@ -96,21 +96,29 @@ const CaseAnalytics: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col">
+    <div
+      className="min-h-screen text-gray-900 flex flex-col"
+      style={{
+        backgroundImage: "url('/law-bg.jpg')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       <Navbar userName={null} onSignOut={() => {}} />
       <main className="flex-grow max-w-7xl mx-auto py-12 px-8">
-        <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-10">
+        <h1 className="text-4xl font-extrabold text-center mb-10 text-white">
           Case Analytics
         </h1>
         {loading ? (
-          <p className="text-center text-lg font-medium text-gray-700">
+          <p className="text-center text-lg font-medium text-gray-100">
             Loading analytics...
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Verdicts by Court */}
-            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-              <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">
+            <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-6 flex flex-col items-center">
+              <h2 className="text-xl font-bold text-teal-800 mb-6 text-center">
                 Verdicts by Court
               </h2>
               <div className="w-full h-64">
@@ -130,8 +138,8 @@ const CaseAnalytics: React.FC = () => {
             </div>
 
             {/* Monthly Verdict Trends */}
-            <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center">
-              <h2 className="text-xl font-bold text-gray-800 mb-6 text-center">
+            <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-6 flex flex-col items-center">
+              <h2 className="text-xl font-bold text-teal-800 mb-6 text-center">
                 Monthly Verdict Trends
               </h2>
               <div className="w-full h-64">
@@ -155,7 +163,8 @@ const CaseAnalytics: React.FC = () => {
       <footer className="bg-gray-800 text-white py-8">
         <div className="max-w-7xl mx-auto px-8 text-center">
           <p className="text-sm">
-            &copy; {new Date().getFullYear()} Verdict Assistance System. All rights reserved.
+            &copy; {new Date().getFullYear()} Verdict Assistance System. All
+            rights reserved.
           </p>
           <p className="mt-2 text-gray-400">
             Enhancing efficiency and accuracy in the courtroom ⚖️

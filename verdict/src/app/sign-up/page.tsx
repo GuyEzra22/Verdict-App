@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -18,16 +19,16 @@ const Signup: React.FC = () => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-  
+
     try {
       if (!auth) {
         throw new Error("Firebase auth is not initialized.");
       }
-  
+
       // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
+
       // Save additional user information to Firestore
       await setDoc(doc(db, "users", user.uid), {
         name,
@@ -35,8 +36,8 @@ const Signup: React.FC = () => {
         email,
         createdAt: new Date(),
       });
-  
-      router.push("/sign-in"); // Redirect to a dashboard or home page after signup
+
+      router.push("/sign-in"); // Redirect to sign-in page after signup
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
     } finally {
@@ -45,8 +46,13 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-white p-12 rounded-3xl shadow-lg w-full max-w-md">
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/signin.jpg')",
+      }}
+    >
+      <div className="bg-white bg-opacity-90 p-12 rounded-3xl shadow-lg w-full max-w-md mt-10 mb-10">
         <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-4">Sign Up</h1>
         <p className="text-center text-gray-500 mb-6">Join us and start your journey today!</p>
         <form onSubmit={handleSignup}>
@@ -116,7 +122,9 @@ const Signup: React.FC = () => {
             type="submit"
             disabled={loading}
             className={`w-full py-3 px-6 text-base font-medium text-white rounded-lg shadow-lg transition-all duration-300 ${
-              loading ? "bg-gray-400" : "bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+              loading
+                ? "bg-gray-400"
+                : "bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             } focus:outline-none`}
           >
             {loading ? "Creating Account..." : "Create Account"}
@@ -128,7 +136,11 @@ const Signup: React.FC = () => {
         </p>
 
         <div className="mt-8 text-center">
-          <p className="text-gray-500 text-xs">By signing up, you agree to our <a href="/terms" className="text-indigo-600 hover:underline">Terms of Service</a> and <a href="/privacy" className="text-indigo-600 hover:underline">Privacy Policy</a>.</p>
+          <p className="text-gray-500 text-xs">
+            By signing up, you agree to our{" "}
+            <a href="/terms" className="text-indigo-600 hover:underline">Terms of Service</a> and{" "}
+            <a href="/privacy" className="text-indigo-600 hover:underline">Privacy Policy</a>.
+          </p>
         </div>
       </div>
     </div>
